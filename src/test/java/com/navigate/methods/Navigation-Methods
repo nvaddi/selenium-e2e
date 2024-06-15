@@ -1,0 +1,20 @@
+Navigation Commands
+=====================
+navigate().to(url)
+navigate().back()
+navigate().forward()
+navigate().refresh()
+
+driver.get("https://demo.nopcommerce.com/"); --> accepts URL only in string format
+		
+driver.navigate().to("https://demo.nopcommerce.com/"); --> this also accepts in URL in String & URL object formats 
+		
+Example:
+URL url = new URL("https://demo.nopcommerce.com/"); --> URL Object
+
+In both cases driver.get("url") and driver.navigate().get(url-Object/"url"); internally it calls get method only
+
+getWindowHandle()
+getWindowHandles()
+
+driver.switchTo().window(windowID)

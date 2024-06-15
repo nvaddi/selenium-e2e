@@ -1,0 +1,10 @@
+frames / iframes
+
+How to switch to frames
+------------------------
+driver.switchTo().frame(name)
+driver.swichTo().frame(id)
+driver.swichTo().frame(WebElement)
+driver.swichTo().frame(index)
+
+driver.swichTo().defaultContent();

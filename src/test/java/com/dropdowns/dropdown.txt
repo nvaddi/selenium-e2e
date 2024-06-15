@@ -1,0 +1,22 @@
+Drop downs
+------------
+
+1. Select dropdown --> uses select tag in html
+2. Bootstrap dropdown --> 
+3. Hidden dropdown
+
+Select dropdown
+===============
+selectByVisibleText()
+selectByIndex(index)
+selectByValue()
+
+<Select id="country">
+	<option index=0 value="in">India</option> --> here 'index' is attribute
+	
+	getOptions()  --> return all options from the dropdown as a WebElement
+	
+
+BootStrap dropdown
+==================
+

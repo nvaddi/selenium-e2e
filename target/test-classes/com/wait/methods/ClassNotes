@@ -1,0 +1,83 @@
+Notes-Day 27
+----------
+Wait commands
+--------------
+
+Synchronization problem: Speed of our application is very less and whereas our execution speed is fast then we will come across this issue.
+-------------------------
+and here we can't control the application speed so to overcome from this issue we will use wait method
+
+Thread.sleep()
+1. implicit wait
+2. explicit wait/fluent wait
+
+NoSuchElementException - Element is not present on the page. Synchronization.
+ElementNotFoundException - Locator is incorrect 
+
+sleep()--> Thread.sleep()
+-------
+Advantages
+1. easy to use
+
+Disadvantages
+1. if the time is not sufficient then you will get exception
+2. if will wait for maximum time out, this will reduce the performance of the script.
+3. multiple times need to use
+
+ implicit wait()--> 
+ Advantages
+ 1. Max it will wait till the provided time, once the element is available within the provided time then immediately it execute next statement, will not wait till the provided time is completed.
+ ex: driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+ Disadvantage
+ 1. If the element is not available within the provided time then implicit wait() will throw exception though the element is available after the provided time.
+ ex: driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+ 
+ 
+ explicit wait()
+ 	Declaration
+ 	
+ 	Usage
+ 	-----
+ 	1. condition based, it will work more effectively
+ 	2. finding elements is inclusive
+ 	3. it will wait for condition to be true, then consider the time
+ 	4. we need to write multiple statements for multiple elements
+ 	
+ 	Conditions
+ 	----------
+ 	alertIsPresent()
+ 	elementSelectionStateToBe()
+ 	elementToBeClickable()
+ 	elementToBeSelected()
+ 	frameToBeAvailableAndSwitchToIt()
+ 	invisibilityOfTheElementLocated()
+ 	invisibilityOfElementWithText()
+ 	presenceOfAllElementsLocatedBy()
+ 	presenceElementLocated()
+ 	textToBePresentInElement()
+ 	textToBePresentInElementLocated()
+ 	testToBePresentInElementValue()
+ 	titles()
+ 	titleContains()
+ 	visibilityOf()
+ 	visibilityOfAllElements()
+ 	visibilityOfAllElementsLocatedBy()
+ 	visibilityElementLocatedBy()
+ 	
+ 	
+ 	FluentWait
+ 	----------
+ 	Sample usage:
+
+   // Waiting 30 seconds for an element to be present on the page, checking
+   // for its presence once every 5 seconds.
+   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+       .withTimeout(Duration.ofSeconds(30L))
+       .pollingEvery(Duration.ofSeconds(5L))
+       .ignoring(NoSuchElementException.class);
+
+   WebElement foo = wait.until(new Function<WebDriver, WebElement>() {
+     public WebElement apply(WebDriver driver) {
+       return driver.findElement(By.id("foo"));
+     }
+   });
