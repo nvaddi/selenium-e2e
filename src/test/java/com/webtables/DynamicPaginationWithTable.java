@@ -36,34 +36,49 @@ public class DynamicPaginationWithTable {
 		int noOfColumns = driver.findElements(By.xpath(
 				"//form[@id='form-customer']//table[@class='table table-bordered table-hover']//tbody//tr[3]//td"))
 				.size();
-		int noOfRows = driver
-				.findElements(By.xpath(
-						"//form[@id='form-customer']//table[@class='table table-bordered table-hover']//tbody//tr"))
-				.size();
+		int noOfRows = driver.findElements(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr")).size();
 
-		WebElement element = null;
-		for (int page = 1; page < noOfPages; page++) {
+		WebElement active_page = null;
+		System.out.println("Name: \t"+"Email: \t"+"Status: ");
+		for (int page = 2; page <=10; page++) {
+			System.out.println("Page no: "+page);
+			active_page = driver.findElement(By.xpath("//ul[@class='pagination']//*[text()="+page+"]"));
+			active_page.click();
 
-			
-	//element = driver.findElement(By.xpath("//form[@id='form-customer']//div[@class='row']//div[@class='col-sm-6 text-start']//ul[@class='pagination']//li[@class='page-item active']//span[@class='page-link'][1]"));
-	
-	element = driver.findElement(By.xpath(
-						"//form[@id='form-customer']//div[@class='row']//div[@class='col-sm-6 text-start']//ul[@class='pagination']//li[@class='page-item']["
-								+ page + "]"));
-				Utils.implicitWaitMethod(10, driver);
-				element.click();
-			
-
-			for (int row = 1; row < noOfRows; row++) {
-				for (int column = 1; column < noOfColumns; column++) {
-
-					System.out.print(driver.findElement(By.xpath(
-							"//form[@id='form-customer']//table[@class='table table-bordered table-hover']//tbody//tr["
-									+ row + "]//td[" + column + "]"))
-							.getText() + "\t");
-				}
-				System.out.println();
+			if(page==1) {
+				
+				//driver.findElement(By.xpath("//ul[@class='pagination']//li//span[@class='page-link']"));
+				Utils.implicitWaitMethod(5, driver);
+				 for(int row = 1; row<=noOfRows;row++) {
+						String customerName = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[2]")).getText();
+						String customerEmail = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[3]")).getText();
+						String status = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[5]")).getText();
+					 System.out.println(customerName+"\t"+customerEmail+"\t"+"Status: "+status);
+					 
 			}
+			}else {
+				
+				active_page = driver.findElement(By.xpath("//ul[@class='pagination']//*[text()="+page+"]"));
+				active_page.click();
+				Utils.implicitWaitMethod(5, driver);
+				 for(int row = 1; row<=noOfRows;row++) {
+						String customerName = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[2]")).getText();
+						String customerEmail = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[3]")).getText();
+						String status = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[5]")).getText();
+					 System.out.println(customerName+"\t"+customerEmail+"\t"+"Status: "+status);
+					 
+			}
+				
+			}
+	/*		
+	 *		active_page = driver.findElement(By.xpath("//ul[@class='pagination']//*[text()="+page+"]")); 
+	 		
+			 for(int row = 1; row<=noOfRows;row++) {
+				String customerName = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[2]")).getText();
+				String customerEmail = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[3]")).getText();
+				String status = driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']//tbody//tr["+row+"]//td[5]")).getText();
+			 System.out.println(customerName+"\t"+customerEmail+"\t"+"Status: "+status);
+			 } */
 		}
 	}
 }
